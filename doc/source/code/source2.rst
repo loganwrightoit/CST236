@@ -13,7 +13,7 @@ Square Example
 ^^^^^^^^^^^^^^
 
 >>> from source.source2 import get_rect_type
->>> get_rect_type(2, 2, 2, 2, 5)
+>>> get_rect_type(2, 2, 2, 2)
 'square'
 
 Simple DocTest Example
