@@ -1,4 +1,4 @@
-Source Example
+Source1 Example
 ==============
 
 Source1 provides functions for describing a triangle.
