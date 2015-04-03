@@ -3,3 +3,4 @@
 *.html
 .coverage
 /htmlcov
+/doc/build
