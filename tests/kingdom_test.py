@@ -1,6 +1,7 @@
 import logging
 from source.kingdom import Kingdom
 from source.threat import Threat
+import source.orc
 import unittest
 
 class KingdomTest(unittest.TestCase):
@@ -22,19 +23,19 @@ class KingdomTest(unittest.TestCase):
     def test_add_threat(self):
         threats = self.obj.getThreats()
         self.assertEqual(threats, [])
-        self.obj.addThreat(Threat(5))
+        self.obj.addThreat(source.orc.OrcRed(5))
         threats = self.obj.getThreats()
         self.assertNotEqual(threats, [])
 
     def test_identify_orc_threats(self):
         threats = self.obj.getThreats()
-        threats.append(Threat(2))
-        threats.append(Threat(3))
-        results = self.obj.getThreat(4)
+        threats.append(source.orc.OrcWhite())
+        threats.append(source.orc.OrcBlack())
+        results = self.obj.getThreat(source.orc.OrcYellow().threatType)
         self.assertEqual(results, [])
-        results = self.obj.getThreat(2)
+        results = self.obj.getThreat(source.orc.OrcWhite().threatType)
         self.assertNotEqual(results, [])
-        self.assertEqual(results[0].threatType, 2)
+        self.assertEqual(results[0].threatType, source.orc.OrcWhite().threatType)
 
     def test_remove_threat_by_uuid(self):
         kingdom = Kingdom()
@@ -86,7 +87,5 @@ class KingdomTest(unittest.TestCase):
     def test_random_orc_generation(self):
         self.assertEqual(self.obj.getThreats(), [])
         self.obj.generateThreats()
-        list1 = self.obj.getThreats()
-        self.obj.generateThreats()
-        list2 = self.obj.getThreats()
-        self.assertNotEqual(cmp(list1, list2), 1)
+        threats = self.obj.getThreats()
+        self.assertNotEqual(threats, [])

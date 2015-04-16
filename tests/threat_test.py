@@ -1,11 +1,12 @@
 import logging
 from source.threat import Threat
+import source.orc
 import unittest
 
 class ThreatTest(unittest.TestCase):
     
     def setUp(self):
-        self.obj = Threat(2)
+        self.obj = source.orc.OrcWhite()
         self.logger = logging.getLogger(__name__ + '.' + self.__class__.__name__)
 
     def test_distance(self):
@@ -17,8 +18,8 @@ class ThreatTest(unittest.TestCase):
         self.assertTrue(self.obj.velocity == 2)
 
     def test_type(self):
-        self.assertFalse(self.obj.threatType == 3)
-        self.assertTrue(self.obj.threatType == 2)
+        orc = source.orc.OrcWhite()
+        self.assertEqual(self.obj.threatType, orc.threatType)
 
     def test_get_uuid(self):
         self.assertTrue(self.obj.uuid != None);

@@ -4,6 +4,7 @@ Kingdom
 
 from random import randint
 from source.threat import Threat
+import source.orc
 import logging
 
 logger = logging.getLogger(__name__)
@@ -69,7 +70,9 @@ class Kingdom(object):
 
     def generateThreats(self):
         self.__threats = []
-        numThreats = randint(2, 15)
+        types = [ source.orc.OrcBlack(), source.orc.OrcWhite(), source.orc.OrcRed(), source.orc.OrcGreen(), source.orc.OrcBlue(), source.orc.OrcYellow(), source.orc.OrcOrange(), source.orc.OrcPink() ]
+        numThreats = randint(2, 100)
         for a in range(0, numThreats):
-            orcType = randint(1, 8)
-            self.__threats.append(Threat(orcType))
+            orcType = randint(0, 7)
+            klass = types[randint(0, 7)].__class__
+            self.__threats.append(klass())

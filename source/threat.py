@@ -2,9 +2,11 @@
 Threat
 """
 
+from abc import ABCMeta, abstractproperty
+
 class Threat(object):
     """
-    Threat Class
+    Threat Abstract Class
     """
 
     __next_uuid = 0
@@ -12,7 +14,6 @@ class Threat(object):
     def __init__(self, threatType = 0):
         self.__distance = 10
         self.__velocity = 1
-        self.__type = threatType
         self.__priority = 0
         self.__uuid = self.__class__.__next_uuid
         self.__class__.__next_uuid += 1
@@ -38,9 +39,8 @@ class Threat(object):
     def priority(self, x):
         self.__priority = x
 
-    @property
-    def threatType(self):
-        return self.__type
+    @abstractproperty
+    def threatType(self): pass
 
     @property
     def uuid(self):
