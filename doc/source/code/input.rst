@@ -1,25 +1,24 @@
-Source Example
+Input Example
 ==============
 
-Source1 provides functions for describing a triangle.
+Input provides functions designed to process user input in the absense of an input mechanism, such as during automated testing.
 
-Determining Triangle Type
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Process Input
+^^^^^^^^^^^^^^^^
 
-The function :func:`source.source1.get_triangle_type` provides users with a way to provide a set of three sides
-of a triangle and returns the type of triangle ("equilateral", "isosceles", "scalene" or "invalid")
+The function :func:`source.input.process` provides testers with a way to provide user commands to control the program.
 
-Scalene Example
-^^^^^^^^^^^^^^^
+Process Example
+^^^^^^^^^^^^^^^^^^
 
->>> from source.source1 import get_triangle_type
->>> get_triangle_type(1, 2, 3)
-'scalene'
+>>> import source.input
+>>> source.input.Input().process("?")
+'Some options'
 
 
 
 Module Reference
 ^^^^^^^^^^^^^^^^
 
-.. automodule:: source.source1
+.. automodule:: source.input
     :members:
