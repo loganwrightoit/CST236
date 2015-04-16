@@ -23,7 +23,7 @@ class KingdomTest(unittest.TestCase):
     def test_add_threat(self):
         threats = self.obj.getThreats()
         self.assertEqual(threats, [])
-        self.obj.addThreat(source.orc.OrcRed(5))
+        self.obj.addThreat(source.orc.OrcRed())
         threats = self.obj.getThreats()
         self.assertNotEqual(threats, [])
 
@@ -40,8 +40,8 @@ class KingdomTest(unittest.TestCase):
     def test_remove_threat_by_uuid(self):
         kingdom = Kingdom()
         threats = kingdom.getThreats()
-        threats.append(Threat())
-        threats.append(Threat())
+        threats.append(source.orc.OrcWhite())
+        threats.append(source.orc.OrcBlue())
         self.assertNotEqual(threats, [])
         uuid = threats[0].uuid;
         kingdom.removeThreat(uuid)
@@ -59,7 +59,7 @@ class KingdomTest(unittest.TestCase):
 
     def test_change_threat_priority(self):
         threats = self.obj.getThreats()
-        threats.append(Threat(5))
+        threats.append(source.orc.OrcWhite())
         threats[0].priority = 2
         self.assertEqual(threats[0].priority, 2)
         threats[0].priority = 5
@@ -67,17 +67,17 @@ class KingdomTest(unittest.TestCase):
 
     def test_find_threat_by_uuid(self):
         threats = self.obj.getThreats()
-        threat = Threat()
+        threat = source.orc.OrcBlack()
         uuid = threat.uuid
-        threats.append(Threat())
+        threats.append(source.orc.OrcWhite())
         threats.append(threat)
-        threats.append(Threat())
+        threats.append(source.orc.OrcPink())
         newThreat = self.obj.getThreatByUUID(uuid)
         self.assertEqual(newThreat.uuid, uuid)
 
     def test_kill_all_threats(self):
-        self.obj.addThreat(Threat(5))
-        self.obj.addThreat(Threat(3))
+        self.obj.addThreat(source.orc.OrcWhite())
+        self.obj.addThreat(source.orc.OrcRed())
         threats = self.obj.getThreats()
         self.assertNotEqual(threats, [])
         self.obj.removeThreats()

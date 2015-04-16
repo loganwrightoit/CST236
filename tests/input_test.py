@@ -1,6 +1,7 @@
 import logging
 from source.kingdom import Kingdom
 from source.threat import Threat
+import source.orc
 from source.input import Input
 import unittest
 
@@ -22,8 +23,8 @@ class InputTest(unittest.TestCase):
 
     def test_input_kill_all_threats(self):
         kingdom = Kingdom()
-        kingdom.addThreat(Threat(5))
-        kingdom.addThreat(Threat(3))
+        kingdom.addThreat(source.orc.OrcWhite())
+        kingdom.addThreat(source.orc.OrcGreen())
         threats = kingdom.getThreats()
         self.assertNotEqual(threats, [])
         self.obj.process("ENTer the Trees", kingdom)

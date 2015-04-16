@@ -11,7 +11,7 @@ class Threat(object):
 
     __next_uuid = 0
 
-    def __init__(self, threatType = 0):
+    def __init__(self):
         self.__distance = 10
         self.__velocity = 1
         self.__priority = 0
