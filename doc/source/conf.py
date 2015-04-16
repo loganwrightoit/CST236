@@ -49,10 +49,10 @@ source_suffix = '.rst'
 #source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'LAB1'
+master_doc = 'LAB2'
 
 # General information about the project.
-project = u'Lab1'
+project = u'Lab2'
 copyright = u'2015, CST236'
 author = u'CST236'
 
@@ -206,7 +206,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Lab1doc'
+htmlhelp_basename = 'Lab2doc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -228,7 +228,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'Lab1.tex', u'Lab1 Documentation',
+  (master_doc, 'Lab2.tex', u'Lab2 Documentation',
    u'CST236', 'manual'),
 ]
 
@@ -258,7 +258,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'lab1', u'Lab1 Documentation',
+    (master_doc, 'lab2', u'Lab2 Documentation',
      [author], 1)
 ]
 
@@ -272,8 +272,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'Lab1', u'Lab1 Documentation',
-   author, 'Lab1', 'One line description of project.',
+  (master_doc, 'Lab2', u'Lab2 Documentation',
+   author, 'Lab2', 'One line description of project.',
    'Miscellaneous'),
 ]
 
