@@ -1,4 +1,6 @@
 import logging
+from source.kingdom import Kingdom
+from source.threat import Threat
 from source.input import Input
 import unittest
 
@@ -17,3 +19,13 @@ class InputTest(unittest.TestCase):
     def test_input_options(self):
         result = self.obj.process("?")
         self.assertEqual(result, "Some options")
+
+    def test_input_kill_all_threats(self):
+        kingdom = Kingdom()
+        kingdom.addThreat(Threat(5))
+        kingdom.addThreat(Threat(3))
+        threats = kingdom.getThreats()
+        self.assertNotEqual(threats, [])
+        self.obj.process("ENTer the Trees", kingdom)
+        threats = kingdom.getThreats()
+        self.assertEqual(threats, [])

@@ -2,6 +2,7 @@
 Kingdom
 """
 
+from random import randint
 from source.threat import Threat
 import logging
 
@@ -40,6 +41,9 @@ class Kingdom(object):
     def units(self, x):
         self.__class__.__units = x
 
+    def addThreat(self, threat):
+        self.__threats.append(threat)
+
     def getThreats(self):
         return self.__threats
 
@@ -55,4 +59,17 @@ class Kingdom(object):
             if a.uuid == uuid:
                 self.__threats.remove(a)
 
-    
+    def removeThreats(self):
+        self.__threats = []
+
+    def getThreatByUUID(self, uuid):
+        for a in self.__threats:
+            if a.uuid == uuid:
+                return a
+
+    def generateThreats(self):
+        self.__threats = []
+        numThreats = randint(2, 15)
+        for a in range(0, numThreats):
+            orcType = randint(1, 8)
+            self.__threats.append(Threat(orcType))
