@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.12: http://docutils.sourceforge.net/" />
+<title></title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 7614 2013-02-21 15:55:51Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: grey; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document">
+
+
+<div class="section" id="welcome-to-cst-236-lab-2">
+<h1>Welcome to CST 236 Lab 2</h1>
+<div class="section" id="when-tests-and-behaviour-is-your-designated-driver">
+<h2>When tests and behaviour is your designated driver</h2>
+<p>In this weeks lab you will be presented with a series of job stories.
+your job is to develop the tests and code to accomplish that given job
+story. The lab is organized into five sections:</p>
+<ol class="arabic simple">
+<li>Python Inheritance</li>
+<li>Python Logging</li>
+<li>Test Driven Development</li>
+<li>Python Behave</li>
+<li>Behaviour Driven Development</li>
+</ol>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is a number of new python concepts detailed in this lab. Unlike last lab
+I'd prefer to field any questions through blackboard. If you have questions please
+look there and/or post your questions. If you see questions that you know the answer
+to feel free to respond (only post python answers, no lab answers).</p>
+</div>
+</div>
+<div class="section" id="grading">
+<h2>Grading</h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="81%" />
+<col width="19%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>Proper implementation of job stories</td>
+<td>20 pts</td>
+</tr>
+<tr><td>Coding Style / Readability</td>
+<td>10 pts</td>
+</tr>
+<tr><td>Proper Documentation (sphinx)</td>
+<td>10 pts</td>
+</tr>
+<tr><td>Analysis Questions</td>
+<td>30 pts</td>
+</tr>
+<tr><td>Correct usage of inheritance</td>
+<td>10 pts</td>
+</tr>
+<tr><td>Correct usage of Python Logging</td>
+<td>10 pts</td>
+</tr>
+<tr><td>Feature files parsed and included in
+sphinx documentation</td>
+<td>10 pts</td>
+</tr>
+<tr><td><strong>Total</strong></td>
+<td>100 pts</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="python-inheritance">
+<h1>Python Inheritance</h1>
+<p>Classes and inheritance in Python is both extremely powerful and can be extremely confusing. It is very different
+from the way that almost every other language handles it. Lets first take a look at the most basic of classes:</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">MyClass</span><span class="punctuation">(</span><span class="name builtin">object</span><span class="punctuation">):</span>
+    <span class="keyword">def</span> <span class="name function">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">):</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">variable</span> <span class="operator">=</span> <span class="literal string">'test'</span>
+</pre>
+<p>In the above example we are creating a python class named MyClass, which inheirts from object. &quot;object&quot; is a python
+keyword that all objects should eventually inherit from (no empty parent lists). Next you will notice the function
+&quot;__init__&quot; this is the constructor for creating a new instance of &quot;MyClass&quot; optionally a list of optional / required
+parameters can be specified that will require or allow the user to provide additional details on creation.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Parameters that specify an equals some value (&quot;var=something&quot;) means that parameter is optional and will default
+to &quot;something&quot; if no parameter is specified. if the parameter is not set to some default then the user must provide
+something.</p>
+</div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the above code &quot;self&quot; is the same as &quot;this&quot; in C++. Self is the current class instance. If a function does
+not specify a self then the function is static and should no be a member of the class. Passing self is not required
+provided you are using a class object with the dot notation.</p>
+</div>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">MyClass</span><span class="punctuation">(</span><span class="name builtin">object</span><span class="punctuation">):</span>
+    <span class="keyword">def</span> <span class="name function">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span> <span class="name">var1</span><span class="punctuation">,</span> <span class="name">var2</span><span class="operator">=</span><span class="literal string">'test'</span><span class="punctuation">):</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">variable1</span> <span class="operator">=</span> <span class="name">var1</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">variable2</span> <span class="operator">=</span> <span class="name">var2</span>
+</pre>
+<p>In the above example var1 is required and must be specified by the user on instantiation. var2 is option and
+can be specified at instantiation.</p>
+<pre class="code python literal-block">
+<span class="name">obj</span> <span class="operator">=</span> <span class="name">MyClass</span><span class="punctuation">(</span><span class="literal string">'awesome'</span><span class="punctuation">)</span>   <span class="comment"># variable1 will be 'awesome' and variable2 will be 'test'</span>
+
+<span class="name">obj</span> <span class="operator">=</span> <span class="name">MyClass</span><span class="punctuation">(</span><span class="literal string">'awesome'</span><span class="punctuation">,</span> <span class="literal string">'story'</span><span class="punctuation">)</span>  <span class="comment"># variable1 will be 'awesome' and variable2 will be 'story'</span>
+</pre>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Python has a concept of positional arguments vs. keyword arguments. Positional arguments specify values
+without specifying the argument associated with it, such as ('1') whereas keyword args specify the name
+of the parameter and the value such as (x='1'). Positional arguments can be dangerous if the underlying parameter
+list/organization might change. Also if there are several parameters with default values and you only want to
+set the last parameters value you will need to use keyword arguments.</p>
+</div>
+<p><strong>Variables should always be created in the init function</strong></p>
+<ul class="simple">
+<li>Even if __init__ does not know what value it should be it should set it to &quot;None&quot; (python equivalent to null)</li>
+<li>Your __init__ can call another function such as &quot;reset&quot; to initialize values but your init function must always
+call that function.</li>
+</ul>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Python is an interpreted language so obj.variable1 is not the same as obj.var1 (obj.var1 never created) so if the
+user tries to set obj.var1 they will not receive an error and obj.variable1 will not be set.</p>
+</div>
+<p><strong>Other functions that can be overloaded:</strong> There is a whole list of functions that a class receives by default.
+each of these can be overloaded if there is a good reason to do so: <a class="reference external" href="http://www.rafekettler.com/magicmethods.html">http://www.rafekettler.com/magicmethods.html</a></p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only overload the __del__ operator if you have a very very very excellent reason to do so. __del__ is dangerous
+because an error here will affect proper garbage collection.</p>
+</div>
+<p><strong>Properties</strong></p>
+<p>Properties in python are similar to setters/getters in C++ and other languages. Python tells us that setters and getters
+are confusing and clutter up your code making it unusable. Instead of creating setters and getters you should create
+properties. See: <a class="reference external" href="https://docs.python.org/2/library/functions.html#property">https://docs.python.org/2/library/functions.html#property</a></p>
+<p><strong>super is super confusing</strong></p>
+<p>When a python class inherits from some other python class there are times when we want to use the functions from
+the parent as is, python allows not defining the function you wish to use from the parent. Other times you will want
+to override this function. But what if you want to use the functionality of the parent function but make some additions
+or changes. This can be accomplished using the &quot;super&quot; call.</p>
+<ul class="simple">
+<li>Super tells python to travel up the the next parent in the inheritance tree.</li>
+<li>Super should almost always be used in an init function (most of the time at the start)</li>
+<li>Super special care must be taken with regards to parameters when using super (if the parent does not take a parameter
+you will recieve an error.</li>
+</ul>
+<p>Example:</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">MyClass</span><span class="punctuation">(</span><span class="name builtin">object</span><span class="punctuation">):</span>
+    <span class="keyword">def</span> <span class="name function">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span> <span class="name">some_var</span><span class="punctuation">):</span>
+        <span class="name builtin pseudo">self</span><span class="operator">.</span><span class="name">some_var</span> <span class="operator">=</span> <span class="name">some_var</span>
+
+<span class="keyword">class</span> <span class="name class">MyChildClass</span><span class="punctuation">(</span><span class="name">MyClass</span><span class="punctuation">):</span>
+
+    <span class="keyword">def</span> <span class="name function">__init__</span><span class="punctuation">(</span><span class="name builtin pseudo">self</span><span class="punctuation">,</span> <span class="name">some_var</span><span class="punctuation">,</span> <span class="name">some_var2</span><span class="punctuation">):</span>
+        <span class="name builtin">super</span><span class="punctuation">(</span><span class="name">MyChildClass</span><span class="punctuation">,</span> <span class="name builtin pseudo">self</span><span class="punctuation">)</span><span class="operator">.</span><span class="name">__init__</span><span class="punctuation">(</span><span class="name">some_var</span><span class="punctuation">)</span>  <span class="comment"># don't pass some_var2 because MyClass doesn't accept it</span>
+</pre>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can also specify the name of the parent you wish to call and the name of the function like
+MyClass.__init__(some_var), but this should only be used in a few select circumstances because it will make
+your life miserable if the inheritance changes. It also destroys mixins.</p>
+</div>
+<p><strong>Mixins/Multiple inheritance</strong></p>
+<p>Mixins are a neat way to combine multiple classes into a single class (and allow that child class to overwrite as it
+needs to).</p>
+<p>Example:</p>
+<p>This of a case of a motorized Vehicle. All cars have some of the same aspects (engine, wheels, etc.
+Now if you wanted to construct an F150 you might define your class as...</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">F150</span><span class="punctuation">(</span><span class="name">Vehicle</span><span class="punctuation">,</span> <span class="name">FourWheels</span><span class="punctuation">,</span> <span class="name">TwoDoors</span><span class="punctuation">,</span> <span class="name">V6</span><span class="punctuation">,</span> <span class="name">FourWheelDrive</span><span class="punctuation">):</span>
+</pre>
+<p>Notice that this inherits from 4 mixins (Vehicle, TwoDoors, V6 and FourWheelDrive).</p>
+<p>Now imagine a GeoMetro:</p>
+<pre class="code python literal-block">
+<span class="keyword">class</span> <span class="name class">GeoMetro</span><span class="punctuation">(</span><span class="name">Vehicle</span><span class="punctuation">,</span> <span class="name">FourWheels</span><span class="punctuation">,</span> <span class="name">TwoDoors</span><span class="punctuation">,</span> <span class="name">FlintStonesPowered</span><span class="punctuation">,</span> <span class="name">FWD</span><span class="punctuation">)</span>
+</pre>
+<p>Notice this shares only two mixins with the F150.</p>
+<p>When creating/using mixins remember:</p>
+<ul class="simple">
+<li>Every class in the mixin/class tree must use super in order for everyone to be able to initialize</li>
+<li>Mixins need to be well throught out rather than just throwing classes at a problem</li>
+<li>Mixins are a good way to ensure you keep your classes less than 1000 lines (pep8 recommended)</li>
+</ul>
+<p><strong>Public, protected, private</strong></p>
+<ul class="simple">
+<li>Public: Variables/function without a leading underscore (_)</li>
+<li>protected: variables/functions with a single underscore (_protected_method)</li>
+<li>private: variables/functions with two underscores (__private_method)</li>
+</ul>
+</div>
+<div class="section" id="python-logging">
+<h1>Python Logging</h1>
+<p>Python logging is an alternative method of providing information to the console or any other steam.
+Python logging is far superior than print statements for several reasons:</p>
+<ul class="simple">
+<li>Allows logging levels which can be turned off/on through configuration rather than additional decision points</li>
+<li>Thread Safe</li>
+<li>Allows changing output location using a single line</li>
+<li>Logging in hierarchical. If you have a logger a.b.c and a.b.d setting the level of a.b will set it for both c and d</li>
+</ul>
+<p>For additional information about logging see: <a class="reference external" href="https://docs.python.org/2/library/logging.html">https://docs.python.org/2/library/logging.html</a></p>
+</div>
+<div class="section" id="test-driven-development-stories">
+<h1>Test Driven Development Stories</h1>
+<p>Your goal for this section is to implement a strong object oriented solution using TDD that completes each of the
+job stories detailed in the rounds below. Each round should be done in sequence to illustrate a more realistic
+development process.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The job stories in this section as split up into three rounds. Your job
+is to implement each round individually. <strong>YOU MUST COMMIT EACH ROUND BEFORE
+MOVING TO THE NEXT ROUND</strong></p>
+</div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The goal of this is to exercise the concepts of test driven development. I do not expect
+each of the end results to be a complete end to end solution especially because some factors
+might be... imaginary.</p>
+</div>
+<div class="section" id="round-1">
+<h2>Round 1</h2>
+<ol class="arabic simple">
+<li>When defending against Orcs I want a way to tell when one has breached the perimeter so I can deploy defenses</li>
+<li>When diagnosing alert system issues, I want a way to isolate output from particular modules at certain levels so
+I don't have to sift through as much logging data</li>
+<li>When interfacing with the system I want &quot;X&quot; to quit the program so I can stop this charade.</li>
+<li>When analyzing threats I want a way to see distance so I can tell how far away each one is.</li>
+<li>When analyzing threats I want a way to see velocity so I can tell how quickly it's closing in.</li>
+</ol>
+</div>
+<div class="section" id="round-2">
+<h2>Round 2</h2>
+<ol class="arabic simple">
+<li>When interfacing with the system I want &quot;?&quot; to display my options so I can see all commands</li>
+<li>When identifying the threats I want to be able to identify specific orcs by type(8 types minimum) so I know what I'm up against</li>
+<li>When defending the kingdom I want a way to remove threats based on unique id, so I can focus on only the alive threats</li>
+<li>When using the system I want to be able to identify units (imperial, metric, parsec or nautical) using a global setting
+so I can market this to other countries.</li>
+<li>When analyzing threats I want to be able to set the priority of each orc so my troops know where to target</li>
+</ol>
+</div>
+<div class="section" id="round-3">
+<h2>Round 3</h2>
+<ol class="arabic simple">
+<li>When identifying threats I want each threat to have a unique id that so I can reference it to get more details</li>
+<li>When I want to demo the capabilities, I want to be able to generate a listing of randomly generated orcs over time
+so that we can better market the defense shield without needing to be under attack.</li>
+<li>When I'm bored of an attack, I want to be able to type &quot;ENTer the Trees&quot; to get rid of all orcs so that I can
+always win.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="python-behave">
+<h1>Python Behave</h1>
+<p>Behave is a python tool that aides in behaviour driven development. Behave is also the tool that I recommend
+most for BDD.</p>
+</div>
+<div class="section" id="behaviour-driven-development">
+<h1>Behaviour Driven Development</h1>
+<p>Your goal for this section is to implement a strong object oriented solution using BDD that completes each of the
+job stories detailed in the rounds below. Each round should be done in sequence to illustrate a more realistic
+development process.</p>
+<p>This section should be completed using a different set of source code and tests from the previous TDD assignment.</p>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The job stories in this section as split up into three rounds. Your job
+is to implement each round individually. <strong>YOU MUST COMMIT EACH ROUND BEFORE
+MOVING TO THE NEXT ROUND</strong></p>
+</div>
+<div class="note">
+<p class="first admonition-title">Note</p>
+<p class="last">The goal of this is to exercise the concepts of test driven development. I do not expect
+each of the end results to be a complete end to end solution especially because some factors
+might be... imaginary.</p>
+</div>
+<p>What is faster: Driving a Hard drive or transferring over ethernet</p>
+<div class="section" id="id1">
+<h2>Round 1</h2>
+<ol class="arabic simple">
+<li>When researching speeds I want the cities, distances and connection speeds to be read in from a
+file so I don't have to type them all in</li>
+<li>When researching speeds I want to be able to select an estimated speed so I can see whether the network or driving would be faster</li>
+<li>When researching speeds I want to be able to select a hard drive size (in GB) so I can have more data</li>
+<li>When I enter a city, a speed and hard drive size I want to see whether the network or the hard drive would be faster</li>
+<li>When I enter a city, speed and hd size I want to see the difference in time between the network and the hard drive</li>
+</ol>
+</div>
+<div class="section" id="id2">
+<h2>Round 2</h2>
+<ol class="arabic simple">
+<li>When entering the driving speed I would like to be able to specify some preset values (Porsche, Bus, Cement Truck, laden swallow)</li>
+<li>When selecting a city I want to be able to create a new city so I have more options</li>
+<li>When I enter a new city, I want the results to be written to the city file.</li>
+</ol>
+</div>
+<div class="section" id="id3">
+<h2>Round 3</h2>
+<ol class="arabic simple">
+<li>When researching speed I want to be able to create a route of 1 - 10 cities so I can get a more accurate picture</li>
+<li>When I start the application I want to enter my starting city, so I know where I am</li>
+<li>When researching speeds I want to be able to account for network latency so that my numbers are more accurate.</li>
+<li>When selecting a hard drive I want to enter the hard drive speed (gb/s) to account for the time to copy.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="lab-write-up">
+<h1>Lab Write-Up</h1>
+<ol class="arabic simple">
+<li>Explain the major differences between TDD and BDD</li>
+<li>What is a mixin, what challenges can occur when testing them? What order are they initialized in</li>
+<li>In python what does &quot;super&quot; do?</li>
+<li>Was there any job stories that did not meet the criteria we discussed in class? How did you handle this case?</li>
+<li>Which model did you find most challenging? Why?</li>
+<li>Which model did you find easiest to update/maintain?</li>
+<li>How did you test that logging occurred only when desired?</li>
+</ol>
+<p><strong>Now make sure you have checked in all files and they test cases pass on drone.io.
+Submit the assignment in blackboard and include both URLs.</strong></p>
+</div>
+</div>
+</body>
+</html>
