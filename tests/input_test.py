@@ -13,3 +13,7 @@ class InputTest(unittest.TestCase):
         self.assertFalse(self.obj.stopped)
         self.obj.process("X")
         self.assertTrue(self.obj.stopped)
+
+    def test_input_options(self):
+        result = self.obj.process("?")
+        self.assertEqual(result, "Some options")

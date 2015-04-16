@@ -23,3 +23,5 @@ class Input(object):
     def process(self, command):
         if command == "X":
             self.__stopped = True
+        elif command == "?":
+            return "Some options"
