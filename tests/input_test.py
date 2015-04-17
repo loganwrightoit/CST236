@@ -1,4 +1,3 @@
-import logging
 from source.kingdom import Kingdom
 from source.threat import Threat
 import source.orc
@@ -9,7 +8,6 @@ class InputTest(unittest.TestCase):
     
     def setUp(self):
         self.obj = Input()
-        self.logger = logging.getLogger(__name__ + '.' + self.__class__.__name__)
 
     def test_input_quit(self):
         self.obj.process("Y")

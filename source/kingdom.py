@@ -5,9 +5,6 @@ Kingdom
 from random import randint
 from source.threat import Threat
 import source.orc
-import logging
-
-logger = logging.getLogger(__name__)
 
 class Kingdom(object):
     """

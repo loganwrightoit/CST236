@@ -2,11 +2,8 @@
 Input
 """
 
-import logging
 from source.kingdom import Kingdom
 from source.threat import Threat
-
-logger = logging.getLogger(__name__)
 
 class Input(object):
     """

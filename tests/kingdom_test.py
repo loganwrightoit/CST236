@@ -1,4 +1,5 @@
 import logging
+from testfixtures import LogCapture
 from source.kingdom import Kingdom
 from source.threat import Threat
 import source.orc
@@ -9,6 +10,20 @@ class KingdomTest(unittest.TestCase):
     def setUp(self):
         self.obj = Kingdom()
         self.logger = logging.getLogger(__name__ + '.' + self.__class__.__name__)
+        self.logger.level = logging.DEBUG
+        self.logCapture = LogCapture()
+
+    def tearDown(self):
+        self.logCapture.uninstall()
+
+    def test_logger(self):
+        self.logger.info('a message')
+        self.logger.error('an error')
+        klass = __name__ + '.' + self.__class__.__name__
+        self.logCapture.check(
+            (klass, 'INFO', 'a message'),
+            (klass, 'ERROR', 'an error'),
+            )
 
     def test_breach_perimeter(self):
         self.assertFalse(self.obj.breached)

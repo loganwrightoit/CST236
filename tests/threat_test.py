@@ -1,4 +1,3 @@
-import logging
 from source.threat import Threat
 import source.orc
 import unittest
@@ -7,7 +6,6 @@ class ThreatTest(unittest.TestCase):
     
     def setUp(self):
         self.obj = source.orc.OrcWhite()
-        self.logger = logging.getLogger(__name__ + '.' + self.__class__.__name__)
 
     def test_distance(self):
         self.obj.distance = 5
