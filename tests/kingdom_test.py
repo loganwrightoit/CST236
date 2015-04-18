@@ -17,13 +17,12 @@ class KingdomTest(unittest.TestCase):
         self.logCapture.uninstall()
 
     def test_logger(self):
-        self.logger.info('a message')
-        self.logger.error('an error')
+        self.logger.level = logging.INFO
+        self.logger.debug('a debug message')
+        self.logger.warning('a warning message')
+        self.logger.level = logging.DEBUG
         klass = __name__ + '.' + self.__class__.__name__
-        self.logCapture.check(
-            (klass, 'INFO', 'a message'),
-            (klass, 'ERROR', 'an error'),
-            )
+        self.logCapture.check((klass, 'WARNING', 'a warning message'))
 
     def test_breach_perimeter(self):
         self.assertFalse(self.obj.breached)
