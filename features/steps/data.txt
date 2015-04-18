@@ -1,0 +1,3 @@
+Salem 50 65
+Portland 140 55
+Seattle 250 60
