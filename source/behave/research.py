@@ -13,7 +13,31 @@ class Research(object):
         self.__city = []
         self.__vehicle = "Sedan"
         self.__drive_speed = None
+        self.__hdd_speed = 0
+        self.__latency = 0
+        self.__city_origin = None
 
+    @property
+    def city_origin(self):
+        return self.__city_origin
+    @city_origin.setter
+    def city_origin(self, x):
+        self.__city_origin = x
+        
+    @property
+    def latency(self):
+        return self.__latency
+    @latency.setter
+    def latency(self, x):
+        self.__latency = x
+        
+    @property
+    def hdd_speed(self):
+        return self.__hdd_speed
+    @hdd_speed.setter
+    def hdd_speed(self, x):
+        self.__hdd_speed = x
+        
     @property
     def drive_speed(self):
         return self.__drive_speed

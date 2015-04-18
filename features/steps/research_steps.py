@@ -152,3 +152,86 @@ def step_impl(context):
             break
     
     assert found is True
+    
+"""
+    Scenario:
+        I want to be able to create a route
+        of 1-10 cities for better accuracy
+"""
+
+@given('a list of cities')
+def step_impl(context):
+    context.cities = context.research.city
+    assert context.cities is context.research.city
+
+@when('selecting from the list of cities')
+def step_impl(context):
+    context.selectCities = []
+    context.selectCities.append(context.cities[0])
+    context.selectCities.append(context.cities[2])
+    print(context.selectCities)
+    assert context.selectCities == [['Salem', '50', '65'], ['Seattle', '250', '60']]
+
+@then('create a route')
+def step_impl(context):
+    assert context.selectCities is not []
+
+"""
+    Scenario:
+        When starting, I want to enter my
+        city origin
+"""
+
+@given('a city of origin')
+def step_impl(context):
+    context.city_origin = "Seattle"
+    pass
+
+@when('starting the program')
+def step_impl(context):
+    pass
+
+@then('set the city of origin')
+def step_impl(context):
+    context.research.city_origin = context.city_origin
+    assert context.research.city_origin is context.city_origin
+    
+"""
+    Scenario:
+        I want to be able to account for
+        network latency
+"""
+
+@given('network latency in milliseconds')
+def step_impl(context):
+    context.latency = 100
+    pass
+
+@when('entering the network latency')
+def step_impl(context):
+    pass
+
+@then('save the network latency')
+def step_impl(context):
+    context.research.latency = context.latency
+    assert context.research.latency is context.latency
+    
+"""
+    Scenario:
+        I want to account for hard drive
+        speed in GB/s
+"""
+
+@given('hard drive speed in GB/s')
+def step_impl(context):
+    context.hdd_speed = 0.1
+    pass
+
+@when('entering the hard drive speed')
+def step_impl(context):
+    pass
+
+@then('save the hard drive speed')
+def step_impl(context):
+    context.research.hdd_speed = context.hdd_speed
+    assert context.research.hdd_speed is context.hdd_speed
