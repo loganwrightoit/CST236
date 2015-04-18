@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to Lab2's TDD documentation!
-================================
+====================================
 
 Contents:
 

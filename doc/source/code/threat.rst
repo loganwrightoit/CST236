@@ -12,7 +12,7 @@ Determining Distance
 The property :py:attr:`source.threat.distance` indicates the distance of the threat.
 
 Distance Example
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 >>> import source.threat
 >>> import source.orc
