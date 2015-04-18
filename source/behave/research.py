@@ -11,7 +11,23 @@ class Research(object):
         self.__mbps = 0
         self.__hdd_size = 0
         self.__city = []
+        self.__vehicle = "Sedan"
+        self.__drive_speed = None
 
+    @property
+    def drive_speed(self):
+        return self.__drive_speed
+    @drive_speed.setter
+    def drive_speed(self, x):
+        self.__drive_speed = x
+        
+    @property
+    def vehicle(self):
+        return self.__vehicle
+    @vehicle.setter
+    def vehicle(self, x):
+        self.__vehicle = x
+        
     @property
     def city(self):
         return self.__city
@@ -34,12 +50,16 @@ class Research(object):
         self.__hdd_size = x
 
     def readDataFromFile(self, path):
-        f = open(path)
-        lines = f.readlines()
-        f.close()
-        for a in lines:
-            self.__city.append(a.split())
-        
+        with open(path, 'r') as f:
+            lines = f.readlines()
+            for a in lines:
+                self.__city.append(a.split())
+                
+    def writeDataToFile(self, path):
+        with open(path, 'w') as f:
+            for a in self.__city:
+                f.write("%s %s %s\n" % (a[0], a[1], a[2]))
+     
     def computeDriveTimeInMinutes(self, dist_mi, speed_mph):
         return float(dist_mi) / float(speed_mph) * 60
         
@@ -54,8 +74,12 @@ class Research(object):
             if a[0] is inCity:
                 temp = a
                 break
+                
+        speed = int(temp[1])
+        if self.__drive_speed != None:
+            speed = self.__drive_speed
     
-        if self.computeDriveTimeInMinutes(int(temp[1]), int(temp[2])) < self.computeNetworkTimeInMinutes():
+        if self.computeDriveTimeInMinutes(int(temp[1]), speed) < self.computeNetworkTimeInMinutes():
             return "Driving"
         else:
             return "Network"

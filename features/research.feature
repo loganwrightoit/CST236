@@ -12,14 +12,25 @@ Feature: Research Phase
     Given a selection of estimated network speeds
      When selecting an estimated network speed
      Then set the estimated network speed
-	 
+
   Scenario: Select hard drive size
     Given a selection of hard drive sizes
      When selecting a size
      Then set the hard drive size
-	 
+
   Scenario: Given data, determine fastest delivery method
     Given a city, network speed, and hard drive size
      When user wants to send the data
      Then determine whether driving the hard drive or sending the data over the network is faster
 	  And determine the time difference between driving the hard drive and sending the data over the network
+
+  Scenario: I want to specify vehicle when entering driving speed
+    Given a vehicle and driving speed
+     When entering the driving speed
+     Then specify a value for vehicle
+  
+  Scenario: Creating and saving a new city
+    Given a selection of cities
+     When entering a new city
+     Then create the new city
+     Then write the new city to file

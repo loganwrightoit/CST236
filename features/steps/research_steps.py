@@ -9,9 +9,6 @@ from source.behave.research import Research
 
 @given('the information is in a file')
 def step_get_data_from_file(context):
-    dir = os.path.dirname(__file__)
-    rel_path = "data.txt"
-    context.data_path = os.path.join(dir, rel_path)
     assert os.path.exists(context.data_path) is True
 
 @when('a user runs the program')
@@ -95,3 +92,63 @@ def step_impl(context):
     assert (context.time_network - 2666.66) < 0.01
     result = context.research.computeTimeDiff(context.city)
     assert (result - 2620.51) < 0.01
+    
+"""
+    Scenario:
+        I want to specify vehicle when entering
+        driving speed
+"""
+
+@given('a vehicle and driving speed')
+def step_impl(context):
+    context.vehicles = [ "Porsche", "Ferrari", "Bus" ]
+    assert context.vehicles is not []    
+
+@when('entering the driving speed')
+def step_impl(context):
+    context.research.drive_speed = 150
+    assert context.research.drive_speed is 150
+
+@then('specify a value for vehicle')
+def step_impl(context):
+    context.research.vehicle = context.vehicles[1]
+    assert context.research.vehicle is context.vehicles[1]
+    
+"""
+    Scenario:
+        Creating and saving a new city
+"""
+
+@given('a selection of cities')
+def step_impl(context):
+    context.cities = [ [ 'Anaheim', '740', '65' ], [ 'Reno', '534', '60' ] ]
+    assert context.cities is not []
+
+@when('entering a new city')
+def step_impl(context):
+    context.city = context.cities[0]
+    assert context.city == [ 'Anaheim', '740', '65' ]
+
+@then('create the new city')
+def step_impl(context):
+    context.research.city.append(context.city)
+    found = False
+    for a in context.research.city:
+        if a[0] == context.city[0]:
+            found = True
+            break
+    
+    assert found is True
+    
+@then('write the new city to file')
+def step_impl(context):
+    context.research.writeDataToFile(context.data_path)
+    context.research.city = []
+    context.research.readDataFromFile(context.data_path)
+    found = False
+    for a in context.research.city:
+        if a[0] == context.city[0]:
+            found = True
+            break
+    
+    assert found is True
