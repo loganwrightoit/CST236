@@ -1,6 +1,6 @@
 ID: #0015
 Requirement: The system shall accept and store answers to previous questions in the form of a string or a function pointer and store it as the generator function.
-Functions: test_can_only_teach_once, test_sequence_matcher
+Functions: test_update_answer
 
 ID: #0021
 Requirement: The system shall respond to the question "Why don't you shutdown" with "I'm afraid I can't do that <username>"
@@ -60,7 +60,7 @@ Functions: test_ask_question
 
 ID: #0011
 Requirement: The system shall accept and store answers to previous questions in the form of a string or a function pointer and store it as the generator function.
-Functions: test_sequence_matcher
+Functions: test_update_answer
 
 ID: #0014
 Requirement: The system shall provide a means of updating an answer to the previously asked question.
