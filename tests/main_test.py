@@ -57,6 +57,7 @@ class TestMain(TestCase):
         assert self.pyTona.ask("What color is the sky" + self.question_mark) == pyTona.main.UNKNOWN_QUESTION
         assert self.pyTona.teach("blue") is None
         assert self.pyTona.teach("yellow") == pyTona.main.NO_TEACH
+        assert self.pyTona.ask("What color is the sky" + self.question_mark) == "blue"
 
     @requirements(['#0014'])
     def test_update_answer(self):
@@ -97,13 +98,3 @@ class TestMain(TestCase):
     @requirements(['#0021'])
     def test_why_not_shutdown(self):
         assert self.pyTona.ask("Why don't you shutdown" + self.question_mark) == ("I'm afraid I can't do that " + getpass.getuser())
-
-"""
-NOTES ON WRITE-UP:
-    #0011 and #0015 are duplicates
-    #0017 does not append "miles" to return string
-    #0018 inconsistency between requirements and code on appending "seconds" to return string
-    #0018 hard-coded return of 42, if it worked
-    #0018 date time format is not working as expected, requirements doesn't list exact format
-    #0019 return string is not the same as requirements
-"""
