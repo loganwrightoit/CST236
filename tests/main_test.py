@@ -1,8 +1,10 @@
 """
-Test for source.source1
+Test for pyTona.main
 """
 import pyTona.main
 from unittest import TestCase
+import datetime
+import getpass
 from ReqTracer import requirements
 
 class TestMain(TestCase):
@@ -36,46 +38,72 @@ class TestMain(TestCase):
     def test_question_word_splitter(self):
         assert self.pyTona.ask("What      day, is today  " + self.question_mark) == pyTona.main.UNKNOWN_QUESTION
 
-    @requirements(['#0006', '#0007', '#0008', '#0009'])
+    @requirements(['#0006', '#0007', '#0008', '#0009', '#0010', '#0011', '#0015'])
     def test_sequence_matcher(self):
         assert self.pyTona.ask("How 0 many 1 days 2 are 3 there 4 in 5 five 6 years 7 earth 8 time" + self.question_mark) == pyTona.main.UNKNOWN_QUESTION
         answer = str(365 * 5)
-        self.pyTona.teach(answer);
-        assert self.pyTona.ask("How many days are there in five years earth time" + self.question_mark) == answer
-        assert self.pyTona.ask("How many days are there in five years time" + self.question_mark) == answer
-        assert self.pyTona.ask("How many days are there in five years" + self.question_mark) != answer
+        assert self.pyTona.teach(answer) is None
+        assert self.pyTona.ask("How many days are there in five years earth time" + self.question_mark) == answer #100% correct
+        assert self.pyTona.ask("How many days are there in five years time" + self.question_mark) == answer #90% correct
+        assert self.pyTona.ask("How many days are there in five years" + self.question_mark) != answer #80% correct
 
-    @requirements(['#0009'])
-    def test_(self):
-        assert True is True
+    @requirements(['#0012', '#0016'])
+    def test_teach_without_question(self):
+        self.pyTona.last_question = None
+        assert self.pyTona.teach("4") == pyTona.main.NO_QUESTION
+
+    @requirements(['#0013', '#0015'])
+    def test_can_only_teach_once(self):
+        assert self.pyTona.ask("What color is the sky" + self.question_mark) == pyTona.main.UNKNOWN_QUESTION
+        assert self.pyTona.teach("blue") is None
+        assert self.pyTona.teach("yellow") == pyTona.main.NO_TEACH
+
+    @requirements(['#0014'])
+    def test_update_answer(self):
+        assert self.pyTona.ask("What color is grass" + self.question_mark) == pyTona.main.UNKNOWN_QUESTION
+        assert self.pyTona.teach("green") is None
+        assert self.pyTona.correct("pink") is None
+        assert self.pyTona.ask("What color is grass" + self.question_mark) == "pink"
+
+    @requirements(['#0017'])
+    def test_feet_in_miles(self):
+        answer = self.pyTona.ask("What is 23482.5 feet in miles" + self.question_mark).split(' ')
+        assert round(float(answer[0]), 2) == 4.45
+        assert answer[1] == "miles"
+
+    @requirements(['#0018'])
+    def test_how_many_seconds_since(self):
+        input_time = datetime.datetime(1993, 5, 2, 15, 35, 12, 745)
+        delta = datetime.datetime.now() - input_time
+        result = self.pyTona.ask("How many seconds since 1993-05-02 15:35:12.000745" + self.question_mark).split(' ')
+
+        seconds = 0
+        try:
+            seconds = int(result[0])
+        except ValueError:
+            self.fail("int() raised ValueError unexpectedly!")
+        
+        assert abs(delta.total_seconds() - seconds) <= 1 # assume 1 second margin of error for CPU time
+        assert result[1] == "seconds"
+        
+    @requirements(['#0019'])
+    def test_who_invented_python(self):
+        assert self.pyTona.ask("Who invented Python" + self.question_mark) == "Guido Rossum(BFDL)"
+
+    @requirements(['#0020'])
+    def test_why_not_understand_me(self):
+        assert self.pyTona.ask("Why don't you understand me" + self.question_mark) == "Because you do not speak 1s and 0s"
+
+    @requirements(['#0021'])
+    def test_why_not_shutdown(self):
+        assert self.pyTona.ask("Why don't you shutdown" + self.question_mark) == ("I'm afraid I can't do that " + getpass.getuser())
 
 """
-DONE - #0005 The system shall break a question down into words separated by space
-DONE - #0006 The system shall determine an answer to a question as a correct if the keywords provide a 90% match and return the answer
-DONE - #0007 The system shall exclude any number value from match code and provide the values to generator function (if one exists)
-DONE - #0008 When a valid match is determined the system shall return the answer
-DONE - #0009 When no valid match is determined the system shall return "I don't know, please provide the answer"
-"""
-
-"""
-#0010 The system shall provide a means of providing an answer to the previously asked question.
-#0011 The system shall accept and store answers to previous questions in the form of a string or a function pointer and store it as the generator function.
-#0012 If no previous question has been asked the system shall respond with "Please ask a question first"
-#0013 If an attempt is made to provide an answer to an already answered question the system shall respond with "I don't know about that. I was taught differently" and not update the question
-"""
-
-"""
-#0014 The system shall provide a means of updating an answer to the previously asked question.
-#0015 The system shall accept and store answers to previous questions in the form of a string or a function pointer and store it as the generator function.
-#0016 If no previous question has been asked the system shall respond with "Please ask a question first"
-"""
-
-"""
-#0017 The system shall respond to the question "What is <float> feet in miles" with the the float value divided by 5280 and append "miles" to the end of the return.
-#0018 The system shall respond to the question "How many seconds since <date time>" with the number of seconds from that point of day till now.
-#0019 The system shall respond to the question "Who invented Python" with "Guido Rossum(BFDL)"
-#0020 The system shall respond to the question "Why don't you understand me" with "Because you do not speak 1s and 0s"
-#0021 The system shall respond to the question "Why don't you shutdown" with "I'm afraid I can't do that <username>"
-
-Username shall be determined by the name of the currently logged in user.
+NOTES ON WRITE-UP:
+    #0011 and #0015 are duplicates
+    #0017 does not append "miles" to return string
+    #0018 inconsistency between requirements and code on appending "seconds" to return string
+    #0018 hard-coded return of 42, if it worked
+    #0018 date time format is not working as expected, requirements doesn't list exact format
+    #0019 return string is not the same as requirements
 """
