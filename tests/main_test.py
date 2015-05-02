@@ -137,17 +137,18 @@ class TestMain(TestCase):
     #    resp = self.pyTona.ask("Who else is here" + self.question_mark)
     #    mock_connect.assert_called_once_with(('192.168.64.3', '1337'))
 
-    @patch.object(pyTona.answer_funcs.socket, 'socket', autospec=True)
-    @patch('pyTona.answer_funcs.socket.socket.connect')
-    @patch('pyTona.answer_funcs.socket.socket.send')
-    @patch('pyTona.answer_funcs.socket.socket.recv')
+    @patch('pyTona.answer_funcs.socket.socket')
     @requirements(['#0024', '#0025', '#0026'])
-    def test_ask_who_else_is_here_socket_send(self, mock_recv, mock_send, mock_connect, mock_sock):
-        mock_connect.side_effect = True
-        mock_send.side_effect = True
-        mock_recv.side_effect = "Logan$John"
+    def test_ask_who_else_is_here_socket_send(self, mock_sock):
+        mock_sock().recv.return_value = "Logan$User"
         resp = self.pyTona.ask("Who else is here" + self.question_mark)
-        mock_sock.send.assert_called_once_with('Who?')
+        self.assertEqual(resp, [ "Logan", "User" ])
+        
+        #mock_sock.recv.side_effect = "Logan$John"
+        #resp = self.pyTona.ask("Who else is here" + self.question_mark)
+        #self.assertEqual(resp, "[ \"Logan\", \"John\" ]")
+        #mock_sock.connect.assert_called_once_with(('192.168.64.3', '1337', 'BAD DATA'))
+        #mock_sock.send.assert_called_once_with('Who?')
 
     #@patch('pyTona.answer_funcs.socket.socket.recv', return_value='Logan$John')
     #@requirements(['#0024', '#0025', '#0026'])
