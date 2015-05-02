@@ -28,19 +28,19 @@ Functions: test_ask_question
 
 ID: #0024
 Requirement: The system shall respond to the question "Who else is here" with a list of users
-Functions: test_ask_who_else_is_here_socket_send
+Functions: test_ask_who_else_is_here_with_response
 
 ID: #0025
 Requirement: When determining users the system shall connect to the server at ip address 192.168.64.3 port 1337 and sending a message "Who?"
-Functions: test_ask_who_else_is_here_socket_send
+Functions: test_ask_who_else_is_here_with_response
 
 ID: #0026
 Requirement: If a response is received from the server the user list shall be parsed from a "$" seperated list of users
-Functions: test_ask_who_else_is_here_socket_send
+Functions: test_ask_who_else_is_here_with_response
 
 ID: #0027
 Requirement: If no response is received from the server the system shall return "IT'S A TRAAAPPPP"
-Functions: 
+Functions: test_ask_who_else_is_here_without_response
 
 ID: #0020
 Requirement: The system shall respond to the question "Why don't you understand me" with "Because you do not speak 1s and 0s"

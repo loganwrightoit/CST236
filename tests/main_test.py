@@ -131,36 +131,21 @@ class TestMain(TestCase):
         resp = self.pyTona.ask("Where are you" + self.question_mark)
         self.assertNotIn(resp, self.static_responses)
 
-    #@patch('pyTona.answer_funcs.socket.socket.connect')
-    #@requirements(['#0024', '#0025', '#0026'])
-    #def test_ask_who_else_is_here_socket_connect(self, mock_connect):
-    #    resp = self.pyTona.ask("Who else is here" + self.question_mark)
-    #    mock_connect.assert_called_once_with(('192.168.64.3', '1337'))
-
     @patch('pyTona.answer_funcs.socket.socket')
     @requirements(['#0024', '#0025', '#0026'])
-    def test_ask_who_else_is_here_socket_send(self, mock_sock):
+    def test_ask_who_else_is_here_with_response(self, mock_sock):
         mock_sock().recv.return_value = "Logan$User"
         resp = self.pyTona.ask("Who else is here" + self.question_mark)
+        mock_sock().connect.assert_called_once_with(('192.168.64.3', '1337'))
+        mock_sock().send.assert_called_once_with('Who?')
         self.assertEqual(resp, [ "Logan", "User" ])
-        
-        #mock_sock.recv.side_effect = "Logan$John"
-        #resp = self.pyTona.ask("Who else is here" + self.question_mark)
-        #self.assertEqual(resp, "[ \"Logan\", \"John\" ]")
-        #mock_sock.connect.assert_called_once_with(('192.168.64.3', '1337', 'BAD DATA'))
-        #mock_sock.send.assert_called_once_with('Who?')
 
-    #@patch('pyTona.answer_funcs.socket.socket.recv', return_value='Logan$John')
-    #@requirements(['#0024', '#0025', '#0026'])
-    #def test_ask_who_else_is_here_socket_recv(self, mock_recv):
-    #    resp = self.pyTona.ask("Who else is here" + self.question_mark)
-    #    self.assertEqual(resp, "IT'S A TRAAAPPPP")
-        
-    #@patch('pyTona.answer_funcs.socket.socket.connect')
-    #@requirements(['#0027'])
-    #def test_ask_who_else_is_here_no_response(self, mock_connect):
-    #    resp = self.pyTona.ask("Who else is here" + self.question_mark)
-    #    self.assertEqual(resp, "IT'S A TRAAAPPPP")
+    @patch('pyTona.answer_funcs.socket.socket')
+    @requirements(['#0027'])
+    def test_ask_who_else_is_here_without_response(self, mock_sock):
+        mock_sock().recv.return_value = False
+        resp = self.pyTona.ask("Who else is here" + self.question_mark)
+        self.assertEqual(resp, "IT'S A TRAAAPPPP")
 
     @requirements(['#0028', '#0029'])
     def test_ask_fibonacci_sequence_digit(self):
