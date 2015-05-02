@@ -131,25 +131,22 @@ class TestMain(TestCase):
         resp = self.pyTona.ask("Where are you" + self.question_mark)
         self.assertNotIn(resp, self.static_responses)
 
-    @patch('pyTona.answer_funcs.socket.socket.connect')
-    @requirements(['#0024', '#0025', '#0026', '#0027'])
-    def test_ask_who_else_is_here(self, mock_connect):
-        
-        # test receiving a response
-        #mock_sock.recv.return_value = "Logan$John Doe"
+    @patch('pyTona.answer_funcs.socket.socket')
+    @requirements(['#0024', '#0025', '#0026'])
+    def test_ask_who_else_is_here_get_response(self, mock_sock):
         resp = self.pyTona.ask("Who else is here" + self.question_mark)
         #mock_sock.connect.assert_called_once_with(('192.168.64.3', '1337'))
-        #mock_connect.assert_called_once_with(('192.168.64.3', '1337'))
-        #self.assertEqual("[ \"Logan\", \"John Doe\" ]", resp)
-
-        # test not receiving a response
-        #mock_sock.connect.side_effect = socket.error
-        #resp = self.pyTona.ask("Who else is here" + self.question_mark)
-        #self.assertEqual(resp, "IT'S A TRAAAPPPP")
+        #mock_sock.send.assert_called_with('Who?')
+        self.assertNotEqual(resp, "IT'S A TRAAAPPPP")
+        
+    @patch('pyTona.answer_funcs.socket.socket.connect')
+    @requirements(['#0027'])
+    def test_ask_who_else_is_here_no_response(self, mock_sock):
+        resp = self.pyTona.ask("Who else is here" + self.question_mark)
+        self.assertEqual(resp, "IT'S A TRAAAPPPP")
 
     @requirements(['#0028', '#0029'])
     def test_ask_fibonacci_sequence_digit(self):
-        #stuff
-        #0028 The system shall respond to the question "What is the <int> digit of the Fibonacci sequence?" with the correct number from the fibonnacci sequence if the number has been found
-        #0029 If the system has not determined the requested digit of the Fibonacci sequence it will respond with A)"Thinking...", B)"One second" or C)"cool your jets" based on a randomly generated number (A is 60% chance, B is 30% chance, C is 10% chance)
-        self.assertTrue(True)
+        expected = [ "Thinking...", "One second", "cool your jets", 55 ]
+        resp = self.pyTona.ask("What is the 10 digit of the Fibonacci sequence" + self.question_mark)
+        self.assertIn(resp, expected)
