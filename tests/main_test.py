@@ -133,7 +133,7 @@ class TestMain(TestCase):
 
     @patch('pyTona.answer_funcs.socket.socket.connect')
     @requirements(['#0024', '#0025', '#0026', '#0027'])
-    def test_ask_who_else_is_here(self, mock_send, mock_connect):
+    def test_ask_who_else_is_here(self, mock_connect):
         
         # test receiving a response
         #mock_sock.recv.return_value = "Logan$John Doe"
