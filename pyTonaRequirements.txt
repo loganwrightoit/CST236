@@ -67,3 +67,5 @@ Username shall be determined by the name of the currently logged in user.
 #0028 The system shall respond to the question "What is the <int> digit of the Fibonacci sequence?" with the correct number from the fibonnacci sequence if the number has been found
 
 #0029 If the system has not determined the requested digit of the Fibonacci sequence it will respond with A)"Thinking...", B)"One second" or C)"cool your jets" based on a randomly generated number (A is 60% chance, B is 30% chance, C is 10% chance)
+
+#0018 If the system detects too many parameters in a question it will throw a "Too many parameters" exception
