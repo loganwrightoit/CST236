@@ -60,7 +60,7 @@ Functions: test_ask_where_are_you
 
 ID: #0028
 Requirement: The system shall respond to the question "What is the <int> digit of the Fibonacci sequence?" with the correct number from the fibonnacci sequence if the number has been found
-Functions: 
+Functions: test_ask_fibonacci_sequence_digit
 
 ID: #0008
 Requirement: When a valid match is determined the system shall return the answer
@@ -68,7 +68,7 @@ Functions: test_sequence_matcher
 
 ID: #0029
 Requirement: If the system has not determined the requested digit of the Fibonacci sequence it will respond with A)"Thinking...", B)"One second" or C)"cool your jets" based on a randomly generated number (A is 60% chance, B is 30% chance, C is 10% chance)
-Functions: 
+Functions: test_ask_fibonacci_sequence_digit
 
 ID: #0015
 Requirement: The system shall accept and store answers to previous questions in the form of a string or a function pointer and store it as the generator function.

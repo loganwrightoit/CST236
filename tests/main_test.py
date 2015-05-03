@@ -2,6 +2,7 @@
 Test for pyTona.main
 """
 import pyTona.main
+from pyTona import answer_funcs
 from unittest import TestCase
 import datetime
 import getpass
@@ -185,19 +186,21 @@ class TestMain(TestCase):
         resp = self.pyTona.ask("Who else is here" + self.question_mark)
         self.assertEqual(resp, "IT'S A TRAAAPPPP")
 
-    #@requirements(['#0028', '#0029'])
-    #def test_ask_fibonacci_sequence_digit(self):
-    #    oob_resp = [ "Thinking...", "One second", "cool your jets" ]
+    @requirements(['#0028', '#0029'])
+    def test_ask_fibonacci_sequence_digit(self):
+        oob_resp = [ "Thinking...", "One second", "cool your jets" ]
 
         # test number in sequence
-    #    resp = self.pyTona.ask("What is the 1 digit of the Fibonacci sequence" + self.question_mark) 
-    #    self.assertEqual(resp, 1)
+        resp = self.pyTona.ask("What is the 1 digit of the Fibonacci sequence" + self.question_mark) 
+        self.assertEqual(resp, 1)
 
         # test chance ratios against expected responses
-    #    count = [ 0, 0, 0 ]
-    #    for a in range(10, 110):
-    #        resp = self.pyTona.ask("What is the " + str(a) + " digit of the Fibonacci sequence" + self.question_mark)
-    #        count[oob_resp.index(resp)] += 1
-    #    self.assertAlmostEqual(count[0], 40, delta=20) # requirement as 60%
-    #    self.assertAlmostEqual(count[1], 30, delta=15) # requirement is 30%
-    #    self.assertAlmostEqual(count[2], 30, delta=15) # requirement is 10%
+        count = [ 0, 0, 0 ]
+        for a in range(10, 110):
+            resp = self.pyTona.ask("What is the " + str(a) + " digit of the Fibonacci sequence" + self.question_mark)
+            count[oob_resp.index(resp)] += 1
+        self.assertAlmostEqual(count[0], 40, delta=20) # requirement as 60%
+        self.assertAlmostEqual(count[1], 30, delta=15) # requirement is 30%
+        self.assertAlmostEqual(count[2], 30, delta=15) # requirement is 10%
+
+        answer_funcs.seq_finder.stop() # stop sequence finder thread
