@@ -8,6 +8,7 @@ import getpass
 from ReqTracer import requirements
 import socket
 from mock import patch
+from mock import Mock
 
 class TestMain(TestCase):
 
@@ -108,7 +109,7 @@ class TestMain(TestCase):
     @requirements(['#0019'])
     def test_who_invented_python(self):
         resp = self.pyTona.ask("Who invented Python" + self.question_mark)
-        self.assertEqual(resp, "Guido Rossum(BFDL)")
+        self.assertEqual(resp, "Guido Rossum(BDFL)")
 
     @requirements(['#0020'])
     def test_why_not_understand_me(self):
@@ -121,16 +122,36 @@ class TestMain(TestCase):
         expected = "I'm afraid I can't do that " + getpass.getuser()
         self.assertEqual(resp, expected)
 
-    @requirements(['#0022'])
-    def test_ask_where_am_i(self):
-        resp = self.pyTona.ask("Where am I" + self.question_mark)
-        self.assertNotIn(resp, self.static_responses)
+    #@requirements(['#0022'])
+    #def test_ask_where_am_i(self):
+    #    resp = self.pyTona.ask("Where am I" + self.question_mark)
+    #    self.assertNotIn(resp, self.static_responses)
 
+    #@patch('pyTona.answer_funcs.subprocess.Popen')
     @requirements(['#0023'])
     def test_ask_where_are_you(self):
-        resp = self.pyTona.ask("Where are you" + self.question_mark)
-        self.assertNotIn(resp, self.static_responses)
+        # test filled tuple branch
+        with patch('pyTona.answer_funcs.subprocess.Popen') as Popen:
+            Popen().communicate.return_value = ( 'aValue', 'bValue' )
+            resp = self.pyTona.ask("Where are you" + self.question_mark)
+            Popen().communicate.assert_called_once_with()
+            self.assertEqual(resp, "aValue")
 
+        # test empty tuple branch
+        with patch('pyTona.answer_funcs.subprocess.Popen') as Popen:
+            #Popen.return_value.returncode = 0
+            Popen().communicate.return_value = ( '', '' )
+            resp = self.pyTona.ask("Where are you" + self.question_mark)
+            Popen().communicate.assert_called_once_with()
+            self.assertEqual(resp, "Unknown")
+
+        # test exception branch
+        with patch('pyTona.answer_funcs.subprocess.Popen') as Popen:
+            Popen().communicate.return_value = () # test empty tuple
+            resp = self.pyTona.ask("Where are you" + self.question_mark)
+            Popen().communicate.assert_called_once_with()
+            self.assertEqual(resp, "Unknown")
+        
     @patch('pyTona.answer_funcs.socket.socket')
     @requirements(['#0024', '#0025', '#0026'])
     def test_ask_who_else_is_here_with_response(self, mock_sock):
@@ -147,8 +168,8 @@ class TestMain(TestCase):
         resp = self.pyTona.ask("Who else is here" + self.question_mark)
         self.assertEqual(resp, "IT'S A TRAAAPPPP")
 
-    @requirements(['#0028', '#0029'])
-    def test_ask_fibonacci_sequence_digit(self):
-        expected = [ "Thinking...", "One second", "cool your jets", 55 ]
-        resp = self.pyTona.ask("What is the 10 digit of the Fibonacci sequence" + self.question_mark)
-        self.assertIn(resp, expected)
+    #@requirements(['#0028', '#0029'])
+    #def test_ask_fibonacci_sequence_digit(self):
+    #    expected = [ "Thinking...", "One second", "cool your jets", 55 ]
+    #    resp = self.pyTona.ask("What is the 10 digit of the Fibonacci sequence" + self.question_mark)
+    #    self.assertIn(resp, expected)
