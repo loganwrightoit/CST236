@@ -68,9 +68,14 @@ class TestMain(TestCase):
         resp = self.pyTona.ask("How many days are there in five years" + self.question_mark) # 80% correct
         self.assertNotEquals(resp, expected)
 
-    @requirements(['#0012', '#0016'])
+    @requirements(['#0012'])
     def test_teach_without_question(self):
         resp = self.pyTona.teach("4")
+        self.assertEqual(resp, pyTona.main.NO_QUESTION)
+
+    @requirements(['#0016'])
+    def test_correct_without_question(self):
+        resp = self.pyTona.correct("4")
         self.assertEqual(resp, pyTona.main.NO_QUESTION)
 
     @requirements(['#0013', ])
@@ -105,6 +110,10 @@ class TestMain(TestCase):
         afloat = round(float(answer[0]), 2)
         self.assertEqual(afloat, 4.45)
         self.assertEqual(answer[1], "miles")
+
+    @requirements(['#0018'])
+    def test_too_many_extra_parameters(self):
+        self.assertRaises(Exception, self.pyTona.ask, "What is 232.5 134.6 feet in miles" + self.question_mark)
         
     @requirements(['#0019'])
     def test_who_invented_python(self):
@@ -178,6 +187,17 @@ class TestMain(TestCase):
 
     #@requirements(['#0028', '#0029'])
     #def test_ask_fibonacci_sequence_digit(self):
-    #    expected = [ "Thinking...", "One second", "cool your jets", 55 ]
-    #    resp = self.pyTona.ask("What is the 10 digit of the Fibonacci sequence" + self.question_mark)
-    #    self.assertIn(resp, expected)
+    #    oob_resp = [ "Thinking...", "One second", "cool your jets" ]
+
+        # test number in sequence
+    #    resp = self.pyTona.ask("What is the 1 digit of the Fibonacci sequence" + self.question_mark) 
+    #    self.assertEqual(resp, 1)
+
+        # test chance ratios against expected responses
+    #    count = [ 0, 0, 0 ]
+    #    for a in range(10, 110):
+    #        resp = self.pyTona.ask("What is the " + str(a) + " digit of the Fibonacci sequence" + self.question_mark)
+    #        count[oob_resp.index(resp)] += 1
+    #    self.assertAlmostEqual(count[0], 40, delta=20) # requirement as 60%
+    #    self.assertAlmostEqual(count[1], 30, delta=15) # requirement is 30%
+    #    self.assertAlmostEqual(count[2], 30, delta=15) # requirement is 10%
