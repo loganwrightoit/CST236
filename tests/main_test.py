@@ -122,35 +122,43 @@ class TestMain(TestCase):
         expected = "I'm afraid I can't do that " + getpass.getuser()
         self.assertEqual(resp, expected)
 
-    #@requirements(['#0022'])
-    #def test_ask_where_am_i(self):
-    #    resp = self.pyTona.ask("Where am I" + self.question_mark)
-    #    self.assertNotIn(resp, self.static_responses)
-
-    #@patch('pyTona.answer_funcs.subprocess.Popen')
-    @requirements(['#0023'])
-    def test_ask_where_are_you(self):
+    @patch('pyTona.answer_funcs.subprocess.Popen')
+    @requirements(['#0022'])
+    def test_ask_where_am_i(self, mock_popen):
         # test filled tuple branch
-        with patch('pyTona.answer_funcs.subprocess.Popen') as Popen:
-            Popen().communicate.return_value = ( 'aValue', 'bValue' )
-            resp = self.pyTona.ask("Where are you" + self.question_mark)
-            Popen().communicate.assert_called_once_with()
-            self.assertEqual(resp, "aValue")
+        mock_popen().communicate.return_value = ( 'aBranch', 'bBranch' )
+        resp = self.pyTona.ask("Where am I" + self.question_mark)
+        mock_popen().communicate.assert_called_once_with()
+        self.assertEqual(resp, "aBranch")
 
         # test empty tuple branch
-        with patch('pyTona.answer_funcs.subprocess.Popen') as Popen:
-            #Popen.return_value.returncode = 0
-            Popen().communicate.return_value = ( '', '' )
-            resp = self.pyTona.ask("Where are you" + self.question_mark)
-            Popen().communicate.assert_called_once_with()
-            self.assertEqual(resp, "Unknown")
+        mock_popen().communicate.return_value = ( '', '' )
+        resp = self.pyTona.ask("Where am I" + self.question_mark)
+        self.assertEqual(resp, "Unknown")
 
         # test exception branch
-        with patch('pyTona.answer_funcs.subprocess.Popen') as Popen:
-            Popen().communicate.return_value = () # test empty tuple
-            resp = self.pyTona.ask("Where are you" + self.question_mark)
-            Popen().communicate.assert_called_once_with()
-            self.assertEqual(resp, "Unknown")
+        mock_popen().communicate.side_effect = Exception
+        resp = self.pyTona.ask("Where am I" + self.question_mark)
+        self.assertEqual(resp, "Unknown")
+
+    @patch('pyTona.answer_funcs.subprocess.Popen')
+    @requirements(['#0023'])
+    def test_ask_where_are_you(self, mock_popen):
+        # test filled tuple branch
+        mock_popen().communicate.return_value = ( 'aValue', 'bValue' )
+        resp = self.pyTona.ask("Where are you" + self.question_mark)
+        mock_popen().communicate.assert_called_once_with()
+        self.assertEqual(resp, "aValue")
+
+        # test empty tuple branch
+        mock_popen().communicate.return_value = ( '', '' )
+        resp = self.pyTona.ask("Where are you" + self.question_mark)
+        self.assertEqual(resp, "Unknown")
+
+        # test exception branch
+        mock_popen().communicate.side_effect = Exception
+        resp = self.pyTona.ask("Where are you" + self.question_mark)
+        self.assertEqual(resp, "Unknown")
         
     @patch('pyTona.answer_funcs.socket.socket')
     @requirements(['#0024', '#0025', '#0026'])
