@@ -21,6 +21,10 @@ class TestMain(TestCase):
     def runTest(self):
         self.pyTona.last_question = None
 
+    def tearDown(self):
+        if answer_funcs.seq_finder is not None:
+            answer_funcs.seq_finder.stop() # stop sequence finder thread
+
     @requirements(['#0001'])
     def test_ask_question(self):
         resp = self.pyTona.ask("What day is today" + self.question_mark)
@@ -202,5 +206,3 @@ class TestMain(TestCase):
         self.assertAlmostEqual(count[0], 40, delta=20) # requirement as 60%
         self.assertAlmostEqual(count[1], 30, delta=15) # requirement is 30%
         self.assertAlmostEqual(count[2], 30, delta=15) # requirement is 10%
-
-        answer_funcs.seq_finder.stop() # stop sequence finder thread
