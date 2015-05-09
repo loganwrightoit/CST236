@@ -238,14 +238,16 @@ class TestMain(TestCase):
     @requirements(['#0032'])
     def test_response_time_elapsed(self):
         for a in range(0, 100):
+            question = "What is %s feet in miles%s" % (str(a * 123.2), self.question_mark)
             start = time.clock()
-            self.pyTona.ask("What is " + str(a) + " feet in miles" + self.question_mark).split(' ')
+            resp = self.pyTona.ask(question)
             proc_time = time.clock() - start
+            self.assertNotEqual(resp, None)
+            self.assertNotIn(resp, self.static_responses)
             self.assertLess(proc_time, .005)
 
     @requirements(['#0033', '#0034'])
     def test_fibonacci_sequence_time_and_length(self):
-        # start a new fibonacci thread
         seq_finder = answer_funcs.FibSeqFinder()
         seq_finder.start()
         time.sleep(60)
