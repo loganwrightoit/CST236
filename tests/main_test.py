@@ -219,10 +219,11 @@ class TestMain(TestCase):
         
     @requirements(['#0030'])
     def test_store_one_million_qas(self):
+        temp = pyTona.main.Interface()
         for a in range(0, 1000000):
             question = "What " + str(uuid.uuid4()).replace('-', ' ') + self.question_mark
-            self.pyTona.question_answers[question] = QA(question, 'an answer')
-        self.assertGreater(len(self.pyTona.question_answers), 999999)
+            temp.question_answers[question] = QA(question, 'an answer')
+        self.assertGreater(len(temp.question_answers), 999999)
 
     @requirements(['#0031'])
     def test_store_answer_time_elapsed(self):
