@@ -1,3 +1,23 @@
+ID: #0034
+Requirement: The system shall generate the first 1,000 Fibonacci sequence numbers in under 60 seconds
+Functions: 
+
+ID: #0030
+Requirement: The system shall be capable of storing at least 1,000,000 questions and answers
+Functions: 
+
+ID: #0033
+Requirement: The system shall stop generating Fibonacci sequence numbers once it has identified the first 1,000 numbers
+Functions: 
+
+ID: #0032
+Requirement: The system shall be able to retrieve a response in under 5 ms 
+Functions: 
+
+ID: #0031
+Requirement: The system shall store answers in under 5 ms
+Functions: 
+
 ID: #0006
 Requirement: The system shall determine an answer to a question as a correct if the keywords provide a 90% match and return the answer
 Functions: test_sequence_matcher
@@ -51,12 +71,12 @@ Requirement: The system shall respond to the question "Why don't you shutdown" w
 Functions: test_why_not_shutdown
 
 ID: #0022
-Requirement: The system shall respond to the question "Where am I" with the local git branch name or "unknown" if it can't be determined
+Requirement: The system shall respond to the question "Where am I" with the local git branch name or "Unknown" if it can't be determined
 Functions: test_ask_where_am_i
 
-ID: #0023
-Requirement: The system shall respond to the question "Where are you" with the URL for the git repo or "unknown" if it can't be determined
-Functions: test_ask_where_are_you
+ID: #0009
+Requirement: When no valid match is determined the system shall return "I don't know, please provide the answer"
+Functions: test_sequence_matcher
 
 ID: #0028
 Requirement: The system shall respond to the question "What is the <int> digit of the Fibonacci sequence?" with the correct number from the fibonnacci sequence if the number has been found
@@ -79,7 +99,7 @@ Requirement: The system shall provide a means of updating an answer to the previ
 Functions: test_update_answer
 
 ID: #0017
-Requirement: The system shall respond to the question "What is <float> feet in miles" with the the float value divided by 5280 and append "miles" to the end of  the return.
+Requirement: The system shall respond to the question "What is <float> feet in miles" with the the float value divided by 5280 and append " miles" to the end of  the return.
 Functions: test_feet_in_miles
 
 ID: #0016
@@ -102,14 +122,15 @@ ID: #0012
 Requirement: If no previous question has been asked the system shall respond with "Please ask a question first"
 Functions: test_teach_without_question
 
-ID: #0009
-Requirement: When no valid match is determined the system shall return "I don't know, please provide the answer"
-Functions: test_sequence_matcher
+ID: #0023
+Requirement: The system shall respond to the question "Where are you" with the URL for the git repo or "Unknown" if it can't be determined
+Functions: test_ask_where_are_you
 
 ID: #0019
 Requirement: The system shall respond to the question "Who invented Python" with "Guido Rossum(BDFL)"
 Functions: test_who_invented_python
 
 ID: #0018
-Requirement: If the system detects too many parameters in a question it will throw a "Too many parameters" exceptionFunctions: test_too_many_extra_parameters
+Requirement: If the system detects too many parameters in a question it will throw a "Too many parameters" exception
+Functions: test_too_many_extra_parameters
 
