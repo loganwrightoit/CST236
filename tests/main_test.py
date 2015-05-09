@@ -11,6 +11,8 @@ import socket
 from mock import patch
 from mock import Mock
 import time
+import uuid
+from pyTona.question_answer import QA
 
 class TestMain(TestCase):
 
@@ -194,16 +196,7 @@ class TestMain(TestCase):
     @requirements(['#0028', '#0029'])
     def test_ask_fibonacci_sequence_digit(self):
         oob_resp = [ "Thinking...", "One second", "cool your jets" ]
-        
-        # test chance ratios against expected responses (prone to failure)
-        #count = [ 0, 0, 0 ]
-        #for a in range(1000, 1100):
-        #    resp = self.pyTona.ask("What is the " + str(a) + " digit of the Fibonacci sequence" + self.question_mark)
-        #    count[oob_resp.index(resp)] += 1
-        #self.assertAlmostEqual(count[0], 60, delta=20) # requirement is 60%
-        #self.assertAlmostEqual(count[1], 30, delta=15) # requirement is 30%
-        #self.assertAlmostEqual(count[2], 10, delta=5) # requirement is 10%
-            
+                    
         # initiate fibonacci thread and verify a waiting response
         resp = self.pyTona.ask("What is the 10 digit of the Fibonacci sequence" + self.question_mark) 
         self.assertIn(resp, oob_resp)
@@ -214,3 +207,46 @@ class TestMain(TestCase):
         # test fibonacci number
         resp = self.pyTona.ask("What is the 10 digit of the Fibonacci sequence" + self.question_mark) 
         self.assertEqual(resp, 55)
+        
+        # test chance ratios against expected responses (prone to failure)
+        #count = [ 0, 0, 0 ]
+        #for a in range(1000, 1100):
+        #    resp = self.pyTona.ask("What is the " + str(a) + " digit of the Fibonacci sequence" + self.question_mark)
+        #    count[oob_resp.index(resp)] += 1
+        #self.assertAlmostEqual(count[0], 60, delta=20) # requirement is 60%
+        #self.assertAlmostEqual(count[1], 30, delta=15) # requirement is 30%
+        #self.assertAlmostEqual(count[2], 10, delta=5) # requirement is 10%
+        
+    @requirements(['#0030'])
+    def test_store_one_million_qas(self):
+        for a in range(0, 1000000):
+            question = "What " + str(uuid.uuid4()).replace('-', ' ') + self.question_mark
+            self.pyTona.question_answers[question] = QA(question, 'an answer')
+        self.assertGreater(len(self.pyTona.question_answers), 999999)
+
+    @requirements(['#0031'])
+    def test_store_answer_time_elapsed(self):
+        for a in range(0, 100):
+            self.pyTona.last_question = "What " + str(uuid.uuid4()).replace('-', ' ') + self.question_mark
+            start = time.clock()
+            resp = self.pyTona.teach("an answer")
+            proc_time = time.clock() - start
+            self.assertEqual(resp, None)
+            self.assertLess(proc_time, .005)
+
+    @requirements(['#0032'])
+    def test_response_time_elapsed(self):
+        for a in range(0, 100):
+            start = time.clock()
+            self.pyTona.ask("What is " + str(a) + " feet in miles" + self.question_mark).split(' ')
+            proc_time = time.clock() - start
+            self.assertLess(proc_time, .005)
+
+    @requirements(['#0033', '#0034'])
+    def test_fibonacci_sequence_time_and_length(self):
+        # start a new fibonacci thread
+        seq_finder = answer_funcs.FibSeqFinder()
+        seq_finder.start()
+        time.sleep(60)
+        self.assertFalse(seq_finder.isAlive())
+        self.assertEqual(seq_finder.num_indexes, 1000)

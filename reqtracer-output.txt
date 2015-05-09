@@ -1,22 +1,22 @@
 ID: #0034
 Requirement: The system shall generate the first 1,000 Fibonacci sequence numbers in under 60 seconds
-Functions: 
+Functions: test_fibonacci_sequence_time_and_length
 
 ID: #0030
 Requirement: The system shall be capable of storing at least 1,000,000 questions and answers
-Functions: 
+Functions: test_store_one_million_qas
 
 ID: #0033
 Requirement: The system shall stop generating Fibonacci sequence numbers once it has identified the first 1,000 numbers
-Functions: 
+Functions: test_fibonacci_sequence_time_and_length
 
 ID: #0032
 Requirement: The system shall be able to retrieve a response in under 5 ms 
-Functions: 
+Functions: test_response_time_elapsed
 
 ID: #0031
 Requirement: The system shall store answers in under 5 ms
-Functions: 
+Functions: test_store_answer_time_elapsed
 
 ID: #0006
 Requirement: The system shall determine an answer to a question as a correct if the keywords provide a 90% match and return the answer
