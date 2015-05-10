@@ -31,7 +31,7 @@ class Interface(object):
             'What is the digit of the factorial sequence': QA('What is the digit of the factorial sequence', get_factorial_seq),
             'What is the current count': QA('What is the current count', get_number_count),
             'What is not the current count': QA('What is not the current count', get_opposite_number_count),
-            'Why are files in the root directory': QA('Why are files in the root directory', get_root_info)
+            'What files are in the root directory': QA('What files are in the root directory', get_root_info)
         }
         self.last_question = None
 

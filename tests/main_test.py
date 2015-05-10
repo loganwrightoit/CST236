@@ -20,6 +20,7 @@ class TestMain(TestCase):
         self.question_mark = chr(0x3F)
         self.pyTona = pyTona.main.Interface()
         self.static_responses = { pyTona.main.UNKNOWN_QUESTION, pyTona.main.NOT_A_QUESTION_RETURN, pyTona.main.NO_QUESTION, pyTona.main.NO_TEACH }
+        self.thread_pool = []
 
     def runTest(self):
         self.pyTona.last_question = None
@@ -27,16 +28,14 @@ class TestMain(TestCase):
     def tearDown(self):
         if answer_funcs.seq_finder is not None:
             answer_funcs.seq_finder.stop()
-            answer_funcs.seq_finder = None
         if answer_funcs.fact_finder is not None:
             answer_funcs.fact_finder.stop()
-            answer_funcs.fact_finder = None
         if answer_funcs.num_counter is not None:
             answer_funcs.num_counter.stop()
-            answer_funcs.num_counter = None
         if answer_funcs.num_opp_counter is not None:
             answer_funcs.num_opp_counter.stop()
-            answer_funcs.num_opp_counter = None
+        for a in self.thread_pool:
+            a.stop()
 
     @requirements(['#0001'])
     def test_ask_question(self):
@@ -247,7 +246,7 @@ class TestMain(TestCase):
 
     @requirements(['#0032'])
     def test_response_time_elapsed(self):
-        for a in range(0, 100):
+        for a in range(0, 50):
             question = "What is %s feet in miles%s" % (str(a * 123.2), self.question_mark)
             start = time.clock()
             resp = self.pyTona.ask(question)
@@ -267,15 +266,14 @@ class TestMain(TestCase):
     #0039 The system shall support 1000 concurrent user counters
     @requirements(['#0039'])
     def test_current_count_load(self):
-        countThreads = []
         for a in range(0, 1000):
-            countThreads.append(answer_funcs.IndexIncrementer())
-            countThreads[-1].start()
+            self.thread_pool.append(answer_funcs.IndexIncrementer())
+            self.thread_pool[-1].start()
         
         time.sleep(10)
         
         counts = []
-        for a in countThreads:
+        for a in self.thread_pool:
             counts.append(a.count)
             a.stop()
         for a in counts:
@@ -285,38 +283,38 @@ class TestMain(TestCase):
     @requirements(['#0040'])
     def test_opposite_current_count_spike_load(self):
         # begin load threads
-        threads = []
         for a in range(0, 1000):
-            threads.append(answer_funcs.IndexDecrementer())
-            threads[-1].start()
+            self.thread_pool.append(answer_funcs.IndexDecrementer())
+            self.thread_pool[-1].start()
         
         time.sleep(10)
                 
         # check counts for load threads
         counts = []
-        for a in threads:
+        for a in self.thread_pool:
             counts.append(a.count)
             a.stop()
         for a in counts:
             self.assertLess(a, -98)
             
+        self.thread_pool = []
+            
         # begin excess threads
-        excess = []
-        for a in range(0, 500):
-            excess.append(answer_funcs.IndexDecrementer())
-            excess[-1].start()
+        for a in range(0, 2000):
+            self.thread_pool.append(answer_funcs.IndexDecrementer())
+            self.thread_pool[-1].start()
             
         time.sleep(10)
             
         # check counts for excess threads
         counts = []
-        for a in excess:
+        for a in self.thread_pool:
             counts.append(a.count)
             a.stop()
         for a in counts:
             self.assertLess(a, -98)
         
-    #0041 The system shall generate the first 1,000 Factorial sequence numbers in under 30 seconds
+    #0041 The system shall generate the first 100 factorial sequence numbers in under 30 seconds
     @requirements(['#0041'])
     def test_factorial_sequence_elapsed_time_and_length(self):
         answer_funcs.fact_finder = answer_funcs.FactSeqFinder()
@@ -325,10 +323,12 @@ class TestMain(TestCase):
         self.assertFalse(answer_funcs.fact_finder.isAlive())
         self.assertEqual(answer_funcs.fact_finder.num_indexes, 100)        
         
-    #0042 The system shall complete 100 simultaneous calls when requesting root directory listing in under 30 seconds
+    #0042 The system shall complete 100 system calls when requesting root directory listing in less than 100ms
     @requirements(['#0042'])
     def test_root_list_load(self):
-        question = "Why are files in the root directory" + self.question_mark
-        resp = self.pyTona.ask(question)
-        print(resp)
-        self.assertTrue(False)
+        total_time = 0
+        for a in range(0, 100):
+            start = time.clock()
+            resp = self.pyTona.ask("What files are in the root directory" + self.question_mark)
+            total_time += time.clock() - start
+        self.assertLess(total_time, .1)

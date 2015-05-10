@@ -87,10 +87,10 @@ Requirement: When a valid match is determined the system shall return the answer
 Functions: test_sequence_matcher
 
 ID: #0042
-Requirement: The system shall complete 100 simultaneous calls when requesting root directory listing in under 30 secondsFunctions: test_root_list_load
+Requirement: The system shall complete 100 system calls when requesting root directory listing in less than 100msFunctions: test_root_list_load
 
 ID: #0040
-Requirement: When asked "What is not the current count?" the system shall return zero and decrease the value by 1 ten times a second
+Requirement: The system shall support 1000 concurrent user opposite counters
 Functions: test_opposite_current_count_spike_load
 
 ID: #0029
@@ -98,7 +98,7 @@ Requirement: If the system has not determined the requested digit of the Fibonac
 Functions: test_ask_fibonacci_sequence_digit
 
 ID: #0041
-Requirement: The system shall generate the first 1,000 Factorial sequence numbers in under 30 seconds
+Requirement: The system shall generate the first 100 factorial sequence numbers in under 30 seconds
 Functions: test_factorial_sequence_elapsed_time_and_length
 
 ID: #0015
@@ -134,7 +134,7 @@ Requirement: If no previous question has been asked the system shall respond wit
 Functions: test_teach_without_question
 
 ID: #0039
-Requirement: When asked "What is the current count?" the system shall return zero and increase the value by 1 ten times a second
+Requirement: The system shall support 1000 concurrent user counters
 Functions: test_current_count_load
 
 ID: #0023

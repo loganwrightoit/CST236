@@ -5,11 +5,13 @@ import subprocess
 import threading
 import time
 import math
+import os
 
 seq_finder = None
 fact_finder = None
 num_counter = None
 num_opp_counter = None
+root_lister = None
 
 def feet_to_miles(feet):
     return "{0} miles".format(float(feet) / 5280)
@@ -90,7 +92,7 @@ def get_fibonacci_seq(index):
             return "cool your jets"
     else:
         return seq_finder.sequence[index]
-
+        
 class FactSeqFinder(threading.Thread):
     def __init__(self, *args, **kwargs):
         super(FactSeqFinder, self).__init__(*args, **kwargs)
@@ -157,5 +159,5 @@ def get_opposite_number_count():
         num_opp_counter.start()
     return num_opp_counter.count
     
-def get_root_info(index):
+def get_root_info():
     return os.listdir('.')

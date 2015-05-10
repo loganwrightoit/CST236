@@ -84,10 +84,10 @@ Username shall be determined by the name of the currently logged in user.
 
 **New Performance Requirements**
 
-#0039 When asked "What is the current count?" the system shall return zero and increase the value by 1 ten times a second
+#0039 The system shall support 1000 concurrent user counters
 
-#0040 When asked "What is not the current count?" the system shall return zero and decrease the value by 1 ten times a second
+#0040 The system shall support 1000 concurrent user opposite counters
 
-#0041 The system shall generate the first 1,000 Factorial sequence numbers in under 30 seconds
+#0041 The system shall generate the first 100 factorial sequence numbers in under 30 seconds
 
-#0042 The system shall complete 100 simultaneous calls when requesting root directory listing in under 30 seconds
+#0042 The system shall complete 100 system calls when requesting root directory listing in less than 100ms
