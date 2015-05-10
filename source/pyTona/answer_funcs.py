@@ -150,7 +150,7 @@ class IndexDecrementer(threading.Thread):
     def run(self):
         while not self._stop.isSet():
             self.count -= 1
-            time.sleep(0.1)    
+            time.sleep(0.1)
     
 def get_opposite_number_count():
     global num_opp_counter

@@ -246,24 +246,16 @@ class TestMain(TestCase):
             self.assertLess(proc_time, .005)
 
     @requirements(['#0032'])
-    def test_response_time_elapsed(self):
-    
-        ######## DEBUG ########
-        # output results to csvimport csv
-        with open('raw_resp_time_elapsed.csv', 'wb') as csvfile:
-            out = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    def test_response_time_elapsed(self):                
+        for a in range(0, 50):
+            question = "What is %s feet in miles%s" % (str(a * 123.2), self.question_mark)
+            start = time.clock()
+            resp = self.pyTona.ask(question)
+            proc_time = time.clock() - start
+            self.assertNotEqual(resp, None)
+            self.assertNotIn(resp, self.static_responses)
+            self.assertLess(proc_time, .005)
                 
-            for a in range(0, 50):
-                question = "What is %s feet in miles%s" % (str(a * 123.2), self.question_mark)
-                start = time.clock()
-                resp = self.pyTona.ask(question)
-                proc_time = time.clock() - start
-                self.assertNotEqual(resp, None)
-                self.assertNotIn(resp, self.static_responses)
-                self.assertLess(proc_time, .005)
-                
-                out.writerow([ a, proc_time * 1000 ])
-
     @requirements(['#0033', '#0034'])
     def test_fibonacci_sequence_time_and_length(self):
         answer_funcs.seq_finder = answer_funcs.FibSeqFinder()
@@ -272,7 +264,7 @@ class TestMain(TestCase):
         self.assertFalse(answer_funcs.seq_finder.isAlive())
         self.assertEqual(answer_funcs.seq_finder.num_indexes, 1000)
         
-    #0039 The system shall support 1000 concurrent user counters
+    #0039 The system shall support 1000 concurrent user queries
     @requirements(['#0039'])
     def test_current_count_load(self):
         for a in range(0, 1000):
@@ -307,7 +299,7 @@ class TestMain(TestCase):
             self.assertLess(a, -98)
             
         self.thread_pool = []
-            
+
         # begin excess threads
         for a in range(0, 2000):
             self.thread_pool.append(answer_funcs.IndexDecrementer())
@@ -340,4 +332,5 @@ class TestMain(TestCase):
             start = time.clock()
             resp = self.pyTona.ask("What files are in the root directory" + self.question_mark)
             total_time += time.clock() - start
-        self.assertLess(total_time, .1)
+        self.assertLess(total_time, .1)        
+            
