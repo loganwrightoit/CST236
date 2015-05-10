@@ -1,5 +1,5 @@
 from pyTona.question_answer import QA
-from pyTona.answer_funcs import feet_to_miles, hal_20, get_git_branch, get_git_url, get_other_users, get_fibonacci_seq
+from pyTona.answer_funcs import feet_to_miles, hal_20, get_git_branch, get_git_url, get_other_users, get_fibonacci_seq, get_factorial_seq, get_number_count, get_opposite_number_count, get_root_info
 
 import difflib
 NOT_A_QUESTION_RETURN = "Was that a question?"
@@ -27,7 +27,11 @@ class Interface(object):
             'Where am I': QA('Where am I', get_git_branch),
             'Where are you': QA('Where are you', get_git_url),
             'Who else is here': QA('Who else is here', get_other_users),
-            'What is the digit of the Fibonacci sequence': QA('What is the digit of the Fibonacci sequence', get_fibonacci_seq)
+            'What is the digit of the Fibonacci sequence': QA('What is the digit of the Fibonacci sequence', get_fibonacci_seq),
+            'What is the digit of the factorial sequence': QA('What is the digit of the factorial sequence', get_factorial_seq),
+            'What is the current count': QA('What is the current count', get_number_count),
+            'What is not the current count': QA('What is not the current count', get_opposite_number_count),
+            'Why are files in the root directory': QA('Why are files in the root directory', get_root_info)
         }
         self.last_question = None
 

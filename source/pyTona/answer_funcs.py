@@ -4,8 +4,12 @@ import socket
 import subprocess
 import threading
 import time
+import math
 
 seq_finder = None
+fact_finder = None
+num_counter = None
+num_opp_counter = None
 
 def feet_to_miles(feet):
     return "{0} miles".format(float(feet) / 5280)
@@ -86,3 +90,72 @@ def get_fibonacci_seq(index):
             return "cool your jets"
     else:
         return seq_finder.sequence[index]
+
+class FactSeqFinder(threading.Thread):
+    def __init__(self, *args, **kwargs):
+        super(FactSeqFinder, self).__init__(*args, **kwargs)
+        self.sequence = []
+        self._stop = threading.Event()
+        self.num_indexes = 0
+
+    def stop(self):
+        self._stop.set()
+
+    def run(self):
+        while not self._stop.isSet() and self.num_indexes < 100:
+            self.sequence.append(math.factorial(self.num_indexes))
+            time.sleep(.2)
+            self.num_indexes += 1
+
+def get_factorial_seq(index):
+    index = int(index)
+    global fact_finder
+    if fact_finder is None:
+        fact_finder = FactSeqFinder()
+        fact_finder.start()
+    return fact_finder.sequence[index]
+    
+class IndexIncrementer(threading.Thread):
+    def __init__(self, *args, **kwargs):
+        super(IndexIncrementer, self).__init__(*args, **kwargs)
+        self._stop = threading.Event()
+        self.count = 0
+
+    def stop(self):
+        self._stop.set()
+
+    def run(self):
+        while not self._stop.isSet():
+            self.count += 1
+            time.sleep(0.1)
+
+def get_number_count():
+    global num_counter
+    if num_counter is None:
+        num_counter = IndexIncrementer()
+        num_counter.start()
+    return num_counter.count
+
+class IndexDecrementer(threading.Thread):
+    def __init__(self, *args, **kwargs):
+        super(IndexDecrementer, self).__init__(*args, **kwargs)
+        self._stop = threading.Event()
+        self.count = 0
+
+    def stop(self):
+        self._stop.set()
+
+    def run(self):
+        while not self._stop.isSet():
+            self.count -= 1
+            time.sleep(0.1)    
+    
+def get_opposite_number_count():
+    global num_opp_counter
+    if num_opp_counter is None:
+        num_opp_counter = IndexDecrementer()
+        num_opp_counter.start()
+    return num_opp_counter.count
+    
+def get_root_info(index):
+    return os.listdir('.')

@@ -26,7 +26,17 @@ class TestMain(TestCase):
 
     def tearDown(self):
         if answer_funcs.seq_finder is not None:
-            answer_funcs.seq_finder.stop() # stop sequence finder thread
+            answer_funcs.seq_finder.stop()
+            answer_funcs.seq_finder = None
+        if answer_funcs.fact_finder is not None:
+            answer_funcs.fact_finder.stop()
+            answer_funcs.fact_finder = None
+        if answer_funcs.num_counter is not None:
+            answer_funcs.num_counter.stop()
+            answer_funcs.num_counter = None
+        if answer_funcs.num_opp_counter is not None:
+            answer_funcs.num_opp_counter.stop()
+            answer_funcs.num_opp_counter = None
 
     @requirements(['#0001'])
     def test_ask_question(self):
@@ -196,7 +206,7 @@ class TestMain(TestCase):
     @requirements(['#0028', '#0029'])
     def test_ask_fibonacci_sequence_digit(self):
         oob_resp = [ "Thinking...", "One second", "cool your jets" ]
-                    
+    
         # initiate fibonacci thread and verify a waiting response
         resp = self.pyTona.ask("What is the 10 digit of the Fibonacci sequence" + self.question_mark) 
         self.assertIn(resp, oob_resp)
@@ -248,8 +258,77 @@ class TestMain(TestCase):
 
     @requirements(['#0033', '#0034'])
     def test_fibonacci_sequence_time_and_length(self):
-        seq_finder = answer_funcs.FibSeqFinder()
-        seq_finder.start()
+        answer_funcs.seq_finder = answer_funcs.FibSeqFinder()
+        answer_funcs.seq_finder.start()
         time.sleep(60)
-        self.assertFalse(seq_finder.isAlive())
-        self.assertEqual(seq_finder.num_indexes, 1000)
+        self.assertFalse(answer_funcs.seq_finder.isAlive())
+        self.assertEqual(answer_funcs.seq_finder.num_indexes, 1000)
+        
+    #0039 The system shall support 1000 concurrent user counters
+    @requirements(['#0039'])
+    def test_current_count_load(self):
+        countThreads = []
+        for a in range(0, 1000):
+            countThreads.append(answer_funcs.IndexIncrementer())
+            countThreads[-1].start()
+        
+        time.sleep(10)
+        
+        counts = []
+        for a in countThreads:
+            counts.append(a.count)
+            a.stop()
+        for a in counts:
+            self.assertGreater(a, 98)
+    
+    #0040 The system shall support 1000 concurrent user opposite counters
+    @requirements(['#0040'])
+    def test_opposite_current_count_spike_load(self):
+        # begin load threads
+        threads = []
+        for a in range(0, 1000):
+            threads.append(answer_funcs.IndexDecrementer())
+            threads[-1].start()
+        
+        time.sleep(10)
+                
+        # check counts for load threads
+        counts = []
+        for a in threads:
+            counts.append(a.count)
+            a.stop()
+        for a in counts:
+            self.assertLess(a, -98)
+            
+        # begin excess threads
+        excess = []
+        for a in range(0, 500):
+            excess.append(answer_funcs.IndexDecrementer())
+            excess[-1].start()
+            
+        time.sleep(10)
+            
+        # check counts for excess threads
+        counts = []
+        for a in excess:
+            counts.append(a.count)
+            a.stop()
+        for a in counts:
+            self.assertLess(a, -98)
+        
+    #0041 The system shall generate the first 1,000 Factorial sequence numbers in under 30 seconds
+    @requirements(['#0041'])
+    def test_factorial_sequence_elapsed_time_and_length(self):
+        answer_funcs.fact_finder = answer_funcs.FactSeqFinder()
+        answer_funcs.fact_finder.start()
+        time.sleep(30)
+        self.assertFalse(answer_funcs.fact_finder.isAlive())
+        self.assertEqual(answer_funcs.fact_finder.num_indexes, 100)        
+        
+    #0042 The system shall complete 100 simultaneous calls when requesting root directory listing in under 30 seconds
+    @requirements(['#0042'])
+    def test_root_list_load(self):
+        question = "Why are files in the root directory" + self.question_mark
+        resp = self.pyTona.ask(question)
+        print(resp)
+        self.assertTrue(False)
