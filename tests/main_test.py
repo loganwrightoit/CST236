@@ -13,6 +13,7 @@ from mock import Mock
 import time
 import uuid
 from pyTona.question_answer import QA
+import csv
 
 class TestMain(TestCase):
 
@@ -246,14 +247,22 @@ class TestMain(TestCase):
 
     @requirements(['#0032'])
     def test_response_time_elapsed(self):
-        for a in range(0, 50):
-            question = "What is %s feet in miles%s" % (str(a * 123.2), self.question_mark)
-            start = time.clock()
-            resp = self.pyTona.ask(question)
-            proc_time = time.clock() - start
-            self.assertNotEqual(resp, None)
-            self.assertNotIn(resp, self.static_responses)
-            self.assertLess(proc_time, .005)
+    
+        ######## DEBUG ########
+        # output results to csvimport csv
+        with open('raw_resp_time_elapsed.csv', 'wb') as csvfile:
+            out = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                
+            for a in range(0, 50):
+                question = "What is %s feet in miles%s" % (str(a * 123.2), self.question_mark)
+                start = time.clock()
+                resp = self.pyTona.ask(question)
+                proc_time = time.clock() - start
+                self.assertNotEqual(resp, None)
+                self.assertNotIn(resp, self.static_responses)
+                self.assertLess(proc_time, .005)
+                
+                out.writerow([ a, proc_time * 1000 ])
 
     @requirements(['#0033', '#0034'])
     def test_fibonacci_sequence_time_and_length(self):

@@ -87,7 +87,8 @@ Requirement: When a valid match is determined the system shall return the answer
 Functions: test_sequence_matcher
 
 ID: #0042
-Requirement: The system shall complete 100 system calls when requesting root directory listing in less than 100msFunctions: test_root_list_load
+Requirement: The system shall complete 100 system calls when requesting root directory listing in less than 100ms
+Functions: test_root_list_load
 
 ID: #0040
 Requirement: The system shall support 1000 concurrent user opposite counters
